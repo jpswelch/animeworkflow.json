@@ -1,0 +1,108 @@
+{
+  "input": {
+    "workflow": {
+      "1": {
+        "inputs": {
+          "ckpt_name": "anillustrious_v5Vae.safetensors"
+        },
+        "class_type": "CheckpointLoaderSimple",
+        "_meta": {
+          "title": "CheckpointLoaderSimple"
+        }
+      },
+      "2": {
+        "inputs": {
+          "text": "Beautiful naked woman",
+          "clip": [
+            "1",
+            1
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIPTextEncode"
+        }
+      },
+      "3": {
+        "inputs": {
+          "seed": 736054741599986,
+          "steps": 20,
+          "cfg": 8,
+          "sampler_name": "euler",
+          "scheduler": "simple",
+          "denoise": 1,
+          "model": [
+            "1",
+            0
+          ],
+          "positive": [
+            "2",
+            0
+          ],
+          "negative": [
+            "8",
+            0
+          ],
+          "latent_image": [
+            "7",
+            0
+          ]
+        },
+        "class_type": "KSampler",
+        "_meta": {
+          "title": "KSampler"
+        }
+      },
+      "4": {
+        "inputs": {
+          "samples": [
+            "3",
+            0
+          ],
+          "vae": [
+            "1",
+            2
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "7": {
+        "inputs": {
+          "value": 512
+        },
+        "class_type": "EmptyLatentImage",
+        "_meta": {
+          "title": "EmptyLatentImage"
+        }
+      },
+      "8": {
+        "inputs": {
+          "text": "ugly, blurry, distorted hands, bad anatomy",
+          "clip": [
+            "1",
+            1
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIPTextEncode"
+        }
+      },
+      "9": {
+        "inputs": {
+          "images": [
+            "4",
+            0
+          ]
+        },
+        "class_type": "SaveImageWebsocket",
+        "_meta": {
+          "title": "SaveImageWebsocket"
+        }
+      }
+    }
+  }
+}
